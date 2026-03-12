@@ -5,19 +5,7 @@ import { useState, useEffect } from 'react';
 import Leftsidebar from '../Components/Leftsidebar';
 import Feed from '../Components/Feed';
 import RightSidebar from '../Components/Rightsidebar';
-// #region constants
-
-// #endregion
-
-// #region styled-components
-
-// #endregion
-
-// #region functions
-
-// #endregion
-
-// #region component
+const API = process.env.REACT_APP_API_URL;
 const propTypes = {};
 
 const defaultProps = {};
@@ -38,7 +26,7 @@ const Home = ({searchQuery}) => {
 const loggedUser =
   JSON.parse(localStorage.getItem("loggedInUser"));
 const res = await fetch(
-  `http://localhost:5000/search?text=${searchQuery.text}
+  `${API}/search?text=${searchQuery.text}
    &page=${searchQuery.page}
    &userId=${loggedUser.id}`
 );

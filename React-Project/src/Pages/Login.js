@@ -8,7 +8,7 @@ const [error, setError] = useState("");
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
 const [showForgot, setShowForgot] = useState(false);
-
+const API = process.env.REACT_APP_API_URL;
   
 
   const handleSubmit = async (e) => {
@@ -17,7 +17,7 @@ const [showForgot, setShowForgot] = useState(false);
 
   try {
     const response = await axios.post(
-      "http://localhost:5000/login",
+      `${API}/login`,
       { email, password }
     );
 

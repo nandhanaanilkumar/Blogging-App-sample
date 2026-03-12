@@ -3,7 +3,7 @@ import React, { useState ,useEffect} from "react";
 const Profileedit= () => {
    const navigate = useNavigate();
   const MAX_BIO = 200;
-
+const API = process.env.REACT_APP_API_URL;
 const [firstName, setFirstName] = useState("");
 const [lastName, setLastName] = useState("");
   const [headline, setHeadline] = useState("");
@@ -52,7 +52,7 @@ const handleSave = async () => {
   }
 
   const response = await fetch(
-    `http://localhost:5000/updateProfile/${loggedUser.id}`,
+    `${API}/updateProfile/${loggedUser.id}`,
     {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -99,7 +99,7 @@ useEffect(() => {
     }
 
     const res = await fetch(
-      `http://localhost:5000/profile/${loggedUser.id}`
+      `${API}/profile/${loggedUser.id}`
     );
 
     const data = await res.json();

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import ChatList from "../Components/Message/ChatList";
 import ChatWindow from "../Components/Message/Chatwindow";
-
+const API = process.env.REACT_APP_API_URL;
 const MessagesPage = ({ searchQuery, setSearchQuery }) => {
 
   console.log("MESSAGES PAGE:", searchQuery);
@@ -13,7 +13,7 @@ const MessagesPage = ({ searchQuery, setSearchQuery }) => {
     const loggedUser =
       JSON.parse(localStorage.getItem("loggedInUser"));
 
-    const res = await fetch("http://localhost:5000/message", {
+    const res = await fetch(`${API}/message`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -63,7 +63,7 @@ const MessagesPage = ({ searchQuery, setSearchQuery }) => {
 
   // create conversation
   const res = await fetch(
-    "http://localhost:5000/conversation",
+    `${API}/conversation`,
     {
       method: "POST",
       headers: {

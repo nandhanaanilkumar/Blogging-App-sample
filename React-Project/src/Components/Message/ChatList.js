@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+const API = process.env.REACT_APP_API_URL;
 const ChatList = ({ onSelectChat,searchQuery }) => {
 
   const [chats, setChats] = useState([]);
@@ -8,6 +8,7 @@ useEffect(() => {
   const fetchChats = async () => {
 
     const loggedUser =
+
       JSON.parse(localStorage.getItem("loggedInUser"));
 
     if (!loggedUser) return;
@@ -15,7 +16,7 @@ useEffect(() => {
     if (!searchQuery?.text) {
 
       const res = await fetch(
-        `http://localhost:5000/conversations/${loggedUser.id}`
+        `${API}/conversations/${loggedUser.id}`
       );
 
       const data = await res.json();
@@ -45,7 +46,7 @@ useEffect(() => {
     }
 
     const res = await fetch(
-      `http://localhost:5000/search/messages/${loggedUser.id}?text=${searchQuery.text}`
+      `${API}/search/messages/${loggedUser.id}?text=${searchQuery.text}`
     );
 console.log("CALLING SEARCH API");
     const data = await res.json();

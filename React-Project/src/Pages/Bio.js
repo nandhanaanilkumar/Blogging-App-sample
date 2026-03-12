@@ -6,26 +6,10 @@ import Analytics from '../Components/Analytics';
 import Experience from '../Components/Experience';
 import ProfilePosts from "../Components/ProfilePosts";
 
-// #region constants
-
-// #endregion
-
-// #region styled-components
-
-// #endregion
-
-// #region functions
-
-// #endregion
-
-// #region component
 const propTypes = {};
 
 const defaultProps = {};
 
-/**
- * 
- */
 const Bio = () => {
     return <div>
         

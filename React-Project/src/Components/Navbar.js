@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import postlyLogo from "../assets/postly-logo.png";
 import { useLocation } from "react-router-dom";
+const API = process.env.REACT_APP_API_URL;
 const Nav = ({searchQuery, setSearchQuery}) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -32,7 +33,7 @@ useEffect(() => {
     if (!user) return;
 
     const res = await fetch(
-      `http://localhost:5000/updates/${user.id}`
+      `${API}/updates/${user.id}`
     );
 
     const data = await res.json();

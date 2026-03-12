@@ -1,6 +1,7 @@
 import React,{ useState,useEffect}from "react";
 import CommentBox from "./Comment/CommentBox";  
 import CommentItem from "./Comment/CommentItem";
+const API = process.env.REACT_APP_API_URL;
 const styles = { 
   feed: {
     width: "100%",
@@ -105,7 +106,7 @@ const [openMenu, setOpenMenu] = useState(null);
       if (!loggedUser) return;
 
       const res = await fetch(
-        `http://localhost:5000/feed/${loggedUser.id}`
+        `${API}/feed/${loggedUser.id}`
       );
 
       const data = await res.json();
@@ -147,7 +148,7 @@ console.log("FEED DATA:", data);
   const loggedUser =
     JSON.parse(localStorage.getItem("loggedInUser"));
 
-  const res = await fetch("http://localhost:5000/like", {
+  const res = await fetch(`${API}/like`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -189,7 +190,7 @@ const addComment = async (postId, text) => {
   const loggedUser =
     JSON.parse(localStorage.getItem("loggedInUser"));
 
-  const res = await fetch("http://localhost:5000/comment", {
+  const res = await fetch(`${API}/comment`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -230,7 +231,7 @@ const deleteComment = (postId, commentId) => {
 const reportPost = async (postId) => {
   const user = JSON.parse(localStorage.getItem("loggedInUser"));
 
-  await fetch("http://localhost:5000/report/post", {
+  await fetch(`${API}/report/post`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -246,7 +247,7 @@ const reportPost = async (postId) => {
 const reportComment = async (commentId) => {
   const user = JSON.parse(localStorage.getItem("loggedInUser"));
 
-  await fetch("http://localhost:5000/report/comment", {
+  await fetch(`${API}/report/comment`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

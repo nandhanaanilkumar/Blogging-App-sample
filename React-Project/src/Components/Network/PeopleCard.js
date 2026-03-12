@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
-
+const API = process.env.REACT_APP_API_URL;
 const PeopleCard = ({ id,name, role ,profileImage}) => {
   const [invitations, setInvitations] = useState([]);
 
@@ -27,7 +27,7 @@ useEffect(() => {
 
   const loggedUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
-  fetch(`http://localhost:5000/invitations/${loggedUser.id}`)
+  fetch(`${API}/invitations/${loggedUser.id}`)
     .then(res => res.json())
     .then(data => setInvitations(data));
 

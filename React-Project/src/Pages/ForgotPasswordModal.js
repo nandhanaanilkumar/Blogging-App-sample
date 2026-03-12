@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+const API = process.env.REACT_APP_API_URL;
 const overlay = {
   position: "fixed",
   top: 0,
@@ -69,7 +69,7 @@ const ForgotPasswordModal = ({ onClose }) => {
       return;
     }
 
-    const res = await fetch("http://localhost:5000/send-otp", {
+    const res = await fetch(`${API}/send-otp`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),
@@ -89,7 +89,7 @@ const ForgotPasswordModal = ({ onClose }) => {
   ============================ */
   const verifyOtp = async () => {
     console.log("VERIFY DATA:", { email, otp });
-    const res = await fetch("http://localhost:5000/verify-otp", {
+    const res = await fetch(`${API}/verify-otp`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, otp }),
@@ -114,7 +114,7 @@ const ForgotPasswordModal = ({ onClose }) => {
       return;
     }
 
-    const res = await fetch("http://localhost:5000/reset-password", {
+    const res = await fetch(`${API}/reset-password`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),

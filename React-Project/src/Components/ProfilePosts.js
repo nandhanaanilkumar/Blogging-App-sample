@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import profile from "../assets/Profile.jpg";
-
+const API = process.env.REACT_APP_API_URL;
 const ProfilePosts = () => {
 
   const [posts, setPosts] = useState([]);
@@ -19,7 +19,7 @@ const ProfilePosts = () => {
 
     if (!loggedUser?.id) return;
 
-    fetch(`http://localhost:5000/userPosts/${loggedUser.id}`)
+    fetch(`${API}/userPosts/${loggedUser.id}`)
       .then(res => res.json())
       .then(data => setPosts(data))
       .catch(err => console.log(err));
@@ -37,7 +37,7 @@ const ProfilePosts = () => {
   const saveEdit = async () => {
 
     await fetch(
-      `http://localhost:5000/editPost/${editingPost}`,
+      `${API}/editPost/${editingPost}`,
       {
         method: "PUT",
         headers: {
@@ -68,7 +68,7 @@ const ProfilePosts = () => {
     JSON.parse(localStorage.getItem("loggedInUser"));
 
   await fetch(
-    `http://localhost:5000/post/${postId}/${loggedUser.id}`,
+    `${API}/post/${postId}/${loggedUser.id}`,
     {
       method: "DELETE",
     }
@@ -84,7 +84,7 @@ const handleLike = async (postId) => {
     JSON.parse(localStorage.getItem("loggedInUser"));
 
   const res = await fetch(
-    "http://localhost:5000/like",
+    `${API}/like`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },

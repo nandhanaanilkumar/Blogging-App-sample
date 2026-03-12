@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import AdminSidebar from "../Components/Admin/Adminsidebar";
 import AdminTopbar from "../Components/Admin/Admintopbar";
 import axios from "axios";
-
+const API = process.env.REACT_APP_API_URL;
 const UserManagementPage = () => {
 
   const [users, setUsers] = useState([]);
@@ -11,7 +11,7 @@ const UserManagementPage = () => {
 
   const fetchUsers = async () => {
     const res = await axios.get(
-      "http://localhost:5000/admin/users"
+      `${API}/admin/users`
     );
     setUsers(res.data);
   };

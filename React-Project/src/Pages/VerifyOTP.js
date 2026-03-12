@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+const API = process.env.REACT_APP_API_URL;
 const VerifyOTP = ({ email, onVerified }) => {
   const [otp, setOtp] = useState("");
   const [timer, setTimer] = useState(60);
@@ -14,7 +14,7 @@ const VerifyOTP = ({ email, onVerified }) => {
   }, [timer]);
 
   const verifyOtp = async () => {
-    const res = await fetch("http://localhost:5000/verify-otp", {
+    const res = await fetch(`${API}/verify-otp`, {
       method:"POST",
       headers:{ "Content-Type":"application/json"},
       body: JSON.stringify({ email, otp }),

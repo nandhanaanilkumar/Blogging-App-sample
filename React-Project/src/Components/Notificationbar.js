@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+const API = process.env.REACT_APP_API_URL;
 const styles = {
   container: {
     width: "100%",
@@ -72,7 +73,7 @@ useEffect(() => {
       JSON.parse(localStorage.getItem("loggedInUser"));
 
     const res = await fetch(
-      `http://localhost:5000/notifications/${loggedUser.id}`
+      `${API}/notifications/${loggedUser.id}`
     );
 
     const data = await res.json();

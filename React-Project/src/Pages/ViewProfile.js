@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import PostCard from "./PostCard"; 
+const API = process.env.REACT_APP_API_URL;
 const ViewProfile = () => {
 
   const [relation, setRelation] = useState("none");
@@ -24,13 +25,13 @@ const ViewProfile = () => {
     try {
 
       const res = await fetch(
-        `http://localhost:5000/profile/${id}`
+        `${API}/profile/${id}`
       );
 
       const data = await res.json();
       setUser(data);
        if (loggedUser && loggedUser._id !== id) {
-        await fetch("http://localhost:5000/add-profile-view", {
+        await fetch(`${API}/add-profile-view`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -45,7 +46,7 @@ const ViewProfile = () => {
       if (loggedUser) {
 
         const relRes = await fetch(
-          `http://localhost:5000/relationship/${loggedUser.id}/${id}`
+          `${API}/relationship/${loggedUser.id}/${id}`
         );
 
         const relData = await relRes.json();
@@ -67,7 +68,7 @@ const ViewProfile = () => {
 
     if (!loggedUser) return;
 
-    await fetch("http://localhost:5000/connect", {
+    await fetch(`${API}/connect`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -82,7 +83,7 @@ const ViewProfile = () => {
   /* ================= ACCEPT REQUEST ================= */
   const acceptRequest = async () => {
 
-    await fetch("http://localhost:5000/acceptConnection", {
+    await fetch(`${API}/acceptConnection`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -99,7 +100,7 @@ const ViewProfile = () => {
   /* ================= IGNORE REQUEST ================= */
   const ignoreRequest = async () => {
 
-    await fetch("http://localhost:5000/ignoreConnection", {
+    await fetch(`${API}/ignoreConnection`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -120,7 +121,7 @@ const startMessage = async () => {
     JSON.parse(localStorage.getItem("loggedInUser"));
  const userId = loggedUser?._id || loggedUser?.id;
  const res = await fetch(
-    "http://localhost:5000/conversation",
+    `${API}/conversation`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },

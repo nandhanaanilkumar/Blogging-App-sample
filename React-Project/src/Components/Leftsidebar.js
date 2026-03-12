@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
+const API = process.env.REACT_APP_API_URL;
 
 import { useNavigate } from "react-router-dom";
 import profile from "../assets/Profile.jpg";
@@ -98,11 +99,11 @@ console.log("LOGGED USER:", loggedUser);
 const userId = loggedUser?._id || loggedUser?.id;
 
   if (!userId) return;
-    fetch(`http://localhost:5000/profile/${userId}`)
+    fetch(`${API}/profile/${userId}`)
       .then(res => res.json())
       .then(data => setUser(data))
       .catch(err => console.log(err));
-fetch(`http://localhost:5000/user-analytics/${userId}`)
+fetch(`${API}/user-analytics/${userId}`)
     .then(res => res.json())
     .then(data => setStats({
   profileViewers: data.profileViews,

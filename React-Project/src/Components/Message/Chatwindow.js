@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import MessageInput from "./MessageInput";
-
+const API = process.env.REACT_APP_API_URL;
 const ChatWindow = ({
   selectedChat,
   messages,
@@ -16,7 +16,7 @@ const loggedUser =
     const fetchMessages = async () => {
 
       const res = await fetch(
-        `http://localhost:5000/messages/${selectedChat.id}`
+        `${API}/messages/${selectedChat.id}`
       );
 
       const data = await res.json();

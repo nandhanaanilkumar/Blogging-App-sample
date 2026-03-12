@@ -3,7 +3,7 @@ import NetworkSidebar from "../Components/Network/NetworkSidebar";
 import NetworkTab from "../Components/Network/NetworkTab";
 import InvitationCard from "../Components/Network/InvitationCard";
 import NetworkGrid from "../Components/Network/NetworkGrid";
-
+const API = process.env.REACT_APP_API_URL;
 const Network = ({ searchQuery }) => {
 
   const [people, setPeople] = useState([]);
@@ -19,7 +19,7 @@ const Network = ({ searchQuery }) => {
       if (!loggedUser) return;
 
       const res = await fetch(
-        `http://localhost:5000/people/${loggedUser.id}`
+        `${API}/people/${loggedUser.id}`
       );
 
       const data = await res.json();
@@ -41,7 +41,7 @@ const Network = ({ searchQuery }) => {
       }
 
       const res = await fetch(
-        `http://localhost:5000/search?text=${searchQuery.text}`
+        `${API}/search?text=${searchQuery.text}`
       );
 
       const data = await res.json();

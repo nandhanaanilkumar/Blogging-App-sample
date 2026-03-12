@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-
+const API = process.env.REACT_APP_API_URL;
 const InvitationCard = () => {
 
   const navigate = useNavigate();
@@ -11,14 +11,14 @@ const InvitationCard = () => {
       localStorage.getItem("loggedInUser")
     );
 
-    fetch(`http://localhost:5000/invitations/${loggedUser.id}`)
+    fetch(`${API}/invitations/${loggedUser.id}`)
       .then(res => res.json())
       .then(data => setInvitations(data));
   }, []);
 
   // ACCEPT
   const handleAccept = async (id) => {
-    await fetch(`http://localhost:5000/accept/${id}`, {
+    await fetch(`${API}/accept/${id}`, {
       method: "PUT"
     });
 
@@ -29,7 +29,7 @@ const InvitationCard = () => {
 
   // IGNORE
   const handleIgnore = async (id) => {
-    await fetch(`http://localhost:5000/ignore/${id}`, {
+    await fetch(`${API}/ignore/${id}`, {
       method: "DELETE"
     });
 

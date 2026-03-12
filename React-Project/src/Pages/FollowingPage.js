@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom";
+const API = process.env.REACT_APP_API_URL;
 const styles = {
 
   container: {
@@ -90,7 +91,7 @@ const startMessage = async (receiverId) => {
     JSON.parse(localStorage.getItem("loggedInUser"));
 
   const res = await fetch(
-    "http://localhost:5000/conversation",
+    `${API}/conversation`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -118,7 +119,7 @@ const startMessage = async (receiverId) => {
       );
 
       const res = await fetch(
-        `http://localhost:5000/following/${loggedUser.id}`
+        `${API}/following/${loggedUser.id}`
       );
 
       const data = await res.json();

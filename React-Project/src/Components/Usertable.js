@@ -1,12 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import { useEffect, useState } from "react";
+const API = process.env.REACT_APP_API_URL;
 const Usertable = () => {
      const [users, setUsers] = useState([]);
 
   const fetchUsers = async () => {
     const res = await axios.get(
-      "http://localhost:5000/admin/users"
+      `${API}/admin/users`
     );
     setUsers(res.data);
   };

@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-
+const API = process.env.REACT_APP_API_URL;
 const Experience = () => {
   const [experiences, setExperiences] = useState([]);
   const loggedUser = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -12,7 +12,7 @@ const Experience = () => {
 
   if (!loggedUser?.id) return;
 
-  fetch(`http://localhost:5000/experience/${loggedUser.id}`)
+  fetch(`${API}/experience/${loggedUser.id}`)
     .then(res => res.json())
     .then(data => setExperiences(data));
 
@@ -28,7 +28,7 @@ const Experience = () => {
     if (!role || !company) return;
 
     const res = await fetch(
-      `http://localhost:5000/experience/${loggedUser.id}`,
+      `${API}/experience/${loggedUser.id}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -48,7 +48,7 @@ const Experience = () => {
     const description = prompt("Description", exp.description);
 
     const res = await fetch(
-      `http://localhost:5000/experience/${loggedUser.id}/${index}`,
+      `${API}/experience/${loggedUser.id}/${index}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },

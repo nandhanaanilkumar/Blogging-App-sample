@@ -2,11 +2,12 @@ import { useState,useEffect } from "react";
 import AdminSidebar from "../Components/Admin/Adminsidebar";
 import AdminTopbar from "../Components/Admin/Admintopbar";
 import axios from "axios";
+const API = process.env.REACT_APP_API_URL;
 const CommentModerationPage = () => {
   const [comments, setComments] = useState([]);
 const fetchComments = async () => {
     const res = await axios.get(
-      "http://localhost:5000/admin/reports/comments"
+      `${API}/admin/reports/comments`
     );
     setComments(res.data);
   };
@@ -21,7 +22,7 @@ const deleteComment = async (commentId) => {
   if (!window.confirm("Delete this comment?")) return;
 
   await axios.put(
-    `http://localhost:5000/admin/reports/comments/delete/${commentId}`
+    `${API}/admin/reports/comments/delete/${commentId}`
   );
 
   fetchComments();
@@ -29,7 +30,7 @@ const deleteComment = async (commentId) => {
 
 const keepComment = async (id) => {
   await axios.put(
-    `http://localhost:5000/admin/reports/comments/keep/${id}`
+    `${API}/admin/reports/comments/keep/${id}`
   );
 
   fetchComments();

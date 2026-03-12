@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+const API = process.env.REACT_APP_API_URL;
 const ReportedPostsTab = () => {
 
   const [reportedPosts, setReportedPosts] = useState([]);
 
   // FETCH FROM BACKEND
   const fetchReportedPosts = async () => {
-    const res = await axios.get(
-      "http://localhost:5000/admin/reports/posts"
-    );
+    const res = await axios.get(`${API}/admin/reports/posts`);
 const sortedPosts = res.data.sort(
     (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
   );
@@ -24,7 +22,7 @@ console.log(reportedPosts);
  const deletePost = async (id) => {
 
   await axios.delete(
-    `http://localhost:5000/admin/reports/posts/delete/${id}`
+    `${API}/admin/reports/posts/delete/${id}`
   );
 
   fetchReportedPosts(); // refresh list
@@ -32,14 +30,14 @@ console.log(reportedPosts);
     const hidePost = async (id) => {
 
     await axios.put(
-`http://localhost:5000/admin/reports/posts/hide/${id}`    );
+`${API}/admin/reports/posts/hide/${id}`    );
 
     fetchReportedPosts();
   };
   const toggleHidePost = async (id) => {
 
   await axios.put(
-    `http://localhost:5000/admin/reports/posts/toggle-hide/${id}`
+    `${API}/admin/reports/posts/toggle-hide/${id}`
   );
 
   fetchReportedPosts();

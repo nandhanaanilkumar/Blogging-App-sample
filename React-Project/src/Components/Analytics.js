@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+const API = process.env.REACT_APP_API_URL;
 const Analytics = () => {
 
   const [analytics, setAnalytics] = useState(null);
@@ -17,7 +17,7 @@ const Analytics = () => {
       if (!userId) return;
 
       const res = await axios.get(
-        `http://localhost:5000/user-analytics/${userId}`
+        `${API}/user-analytics/${userId}`
       );
 
       setAnalytics(res.data);

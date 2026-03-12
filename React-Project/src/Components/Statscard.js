@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+const API = process.env.REACT_APP_API_URL;
 const StatsCards = () => {
 
   const [stats, setStats] = useState({
@@ -21,7 +21,7 @@ const StatsCards = () => {
   const fetchStats = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/admin/stats"
+        `${API}/admin/stats`
       );
 
       setStats(res.data);

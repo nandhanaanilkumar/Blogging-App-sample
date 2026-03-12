@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import profile from "../assets/Profile.jpg";
 import React, { useEffect, useState } from "react";
-
+const API = process.env.REACT_APP_API_URL;
 const styles = {
   container: {
     maxWidth: "1080px",
@@ -78,7 +78,7 @@ const Profile = () => {
     if (!loggedUser) return;
 
     const res = await fetch(
-      `http://localhost:5000/profile/${loggedUser.id}`
+      `${API}/profile/${loggedUser.id}`
     );
 
     const data = await res.json();
@@ -91,13 +91,13 @@ const Profile = () => {
     const loggedUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
     const res1 = await fetch(
-      `http://localhost:5000/followers/${loggedUser.id}`
+      `${API}/followers/${loggedUser.id}`
     );
     const followers = await res1.json();
     setFollowersCount(followers.length);
 
     const res2 = await fetch(
-      `http://localhost:5000/following/${loggedUser.id}`
+      `${API}/following/${loggedUser.id}`
     );
     const following = await res2.json();
     setFollowingCount(following.length);
@@ -110,7 +110,7 @@ const Profile = () => {
     if (!loggedUser) return;
 
     const res = await fetch(
-      `http://localhost:5000/userPosts/${loggedUser.id}`
+      `${API}/userPosts/${loggedUser.id}`
     );
     const posts = await res.json();
     setPostCount(posts.length);
@@ -124,7 +124,7 @@ const Profile = () => {
     const loggedUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
     const response = await fetch(
-      `http://localhost:5000/updateProfile/${loggedUser.id}`,
+      `${API}/updateProfile/${loggedUser.id}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },

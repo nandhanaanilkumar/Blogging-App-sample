@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate} from "react-router-dom";
 import { useState } from "react";
 import profile from "../assets/Profile.jpg";
-
+const API = process.env.REACT_APP_API_URL;
 const styles = {
   sidebar: {
       width: "500px",  
@@ -113,14 +113,14 @@ const [stats, setStats] = useState({
 
     // fetch profile
     const profileRes = await fetch(
-      `http://localhost:5000/profile/${userId}`
+      `${API}/profile/${userId}`
     );
     const profileData = await profileRes.json();
     setUser(profileData);
 
     // fetch analytics
     const statsRes = await fetch(
-      `http://localhost:5000/user-analytics/${userId}`
+      `${API}/user-analytics/${userId}`
     );
 
     const statsData = await statsRes.json();
@@ -144,7 +144,7 @@ const [stats, setStats] = useState({
     backgroundImage: user?.backgroundImage
       ? user.backgroundImage.startsWith("data:image")
         ? `url(${user.backgroundImage})` // base64 image
-        : `url(http://localhost:5000/${user.backgroundImage})` // server image
+        : `url(${API}/${user.backgroundImage})` // server image
       : "linear-gradient(135deg,#0a66c2,#004182)",
     backgroundSize: "cover",
     backgroundPosition: "center",

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+const API = process.env.REACT_APP_API_URL;
 const Drafts = () => {
   const [drafts, setDrafts] = useState([]);
   const navigate = useNavigate();
@@ -8,7 +8,7 @@ useEffect(() => {
 
   const loggedUser = JSON.parse(localStorage.getItem("loggedInUser"));
  if (!loggedUser?.id) return;
-  fetch(`http://localhost:5000/drafts/${loggedUser.id}`)
+  fetch(`${API}/drafts/${loggedUser.id}`)
     .then(res => res.json())
     .then(data => setDrafts(data))
     .catch(err => console.error("Draft fetch error:", err));
@@ -22,7 +22,7 @@ useEffect(() => {
 
   if (!confirmDelete) return;
 
-  await fetch(`http://localhost:5000/draft/${id}`, {
+  await fetch(`${API}/draft/${id}`, {
     method: "DELETE"
   });
 
@@ -33,7 +33,7 @@ useEffect(() => {
 
   try {
 
-    await fetch(`http://localhost:5000/publish/${draft._id}`, {
+    await fetch(`${API}/publish/${draft._id}`, {
       method: "PUT"
     });
 

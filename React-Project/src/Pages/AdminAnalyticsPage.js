@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AdminSidebar from "../Components/Admin/Adminsidebar";
 import AdminTopbar from "../Components/Admin/Admintopbar";
+const API = process.env.REACT_APP_API_URL;
 import {
   LineChart,
   Line,
@@ -20,7 +21,7 @@ const AdminAnalyticsPage = () => {
 
   const fetchAnalytics = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/admin/analytics");
+      const res = await axios.get(`${API}/admin/analytics`);
       console.log("DATA:", res.data);
       setAnalytics(res.data);
     } catch (err) {

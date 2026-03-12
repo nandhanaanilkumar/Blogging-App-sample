@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+const API = process.env.REACT_APP_API_URL;
 const styles = {
   page: {
     background: "#f3f2ef",
@@ -126,7 +127,7 @@ const [previewUrl, setPreviewUrl] = useState(null);
 
   if (draftId) {
 
-    fetch(`http://localhost:5000/draft/${draftId}`)
+    fetch(`${API}/draft/${draftId}`)
       .then(res => res.json())
       .then(data => {
 
@@ -152,7 +153,7 @@ const [previewUrl, setPreviewUrl] = useState(null);
 
       mediaUrl = reader.result;
 
-      await fetch("http://localhost:5000/draft", {
+      await fetch(`${API}/draft`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -172,7 +173,7 @@ const [previewUrl, setPreviewUrl] = useState(null);
 
   } else {
 
-    await fetch("http://localhost:5000/draft", {
+    await fetch(`${API}/draft`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -206,7 +207,7 @@ const handlePost = async () => {
       mediaUrl = reader.result;
 
       if (draftId) {
-        await fetch(`http://localhost:5000/editPost/${draftId}`, {
+        await fetch(`${API}/editPost/${draftId}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -219,7 +220,7 @@ const handlePost = async () => {
 
       } else {
 
-        await fetch("http://localhost:5000/createPost", {
+        await fetch(`${API}/createPost`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -240,7 +241,7 @@ const handlePost = async () => {
 
     if (draftId) {
 
-      await fetch(`http://localhost:5000/editPost/${draftId}`, {
+      await fetch(`${API}/editPost/${draftId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -253,7 +254,7 @@ const handlePost = async () => {
 
     } else {
 
-      await fetch("http://localhost:5000/createPost", {
+      await fetch(`${API}/createPost`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
