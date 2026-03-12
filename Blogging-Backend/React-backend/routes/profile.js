@@ -4,7 +4,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const ProfileView = require("../models/ProfileView");
-const Post = require("../models/post");
+const Post = require("../models/Post");
 router.get("/profile-stats/:id", async (req, res) => {
   try {
 
