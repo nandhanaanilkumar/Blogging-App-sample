@@ -1036,8 +1036,8 @@ app.post("/send-otp", async (req, res) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "bca2427@rajagiri.edu",
-      pass: "fjjb atbn ithq qufa",
+     user: process.env.EMAIL_USER,
+     pass: process.env.EMAIL_PASS,
     },
   });
 
