@@ -1034,19 +1034,22 @@ app.post("/send-otp", async (req, res) => {
   };
 
   const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-     user: process.env.EMAIL_USER,
-     pass: process.env.EMAIL_PASS,
-    },
-  });
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+      connectionTimeout: 10000,
+    });
 
   await transporter.sendMail({
-    from: "bca2427@rajagiri.edu",
-    to: email,
-    subject: "Password Reset OTP",
-    text: `Your OTP is: ${otp}`,
-  });
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: "Password Reset OTP",
+      text: `Your OTP is: ${otp}`,
+    });
 
   res.json({ message: "OTP sent successfully" });
 });
